@@ -9,6 +9,8 @@
 import html
 import json
 import math
+import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -31,6 +33,14 @@ SITE = {
     "theme_color": "#0e0e10",
     # Куда ведёт клик по логотипу (открывается в новой вкладке, лендинг остаётся открытым)
     "main_site": "https://byd.megawatt.uz/",
+    # Откуда страницы в Тильде берут картинки, шрифты, CSS и JS (jsDelivr поверх GitHub).
+    # После изменения файлов в assets/ — новый тег в репозитории (v2, v3…), обновить здесь и пересобрать.
+    "cdn": "https://cdn.jsdelivr.net/gh/MegawattUZB/byd-megawatt-landing@v1",
+    # Адреса страниц в Тильде — на них ведут карточки со страницы выбора модели (tilda/index.html)
+    "tilda_pages": {
+        "chazor": "/promo/pr_chazor",
+        "song-plus": "/promo/pr_songplus_champion-dmi",
+    },
 }
 
 # Реальные отзывы клиентов. Пока список пуст — блок на сайте не выводится.
@@ -770,11 +780,13 @@ def page(slug):
 """
 
 
-def index_page():
+def index_page(hrefs=None):
+    """hrefs — адреса страниц моделей (для Тильды); по умолчанию соседние папки {slug}/."""
     cards = []
     for slug, m in MODELS.items():
+        href = hrefs[slug] if hrefs else f"{slug}/"
         cards.append(
-            f'<a class="pick" href="{slug}/">'
+            f'<a class="pick" href="{href}">'
             f'<img src="assets/img/{slug}/{m["hero_img"]}-800.webp" width="800" height="600" alt="{m["name"]}" loading="lazy">'
             f'<span class="pick__name">{m["name"]}</span>'
             f'<span class="pick__offer">0% · {max_zero_term(m)} мес · от {fmt(min_installment(m))} сум/мес</span></a>'
@@ -803,14 +815,35 @@ def index_page():
 """
 
 
+def tilda_block(full):
+    """Код для HTML-блока T123 в Тильде: ресурсы из <head> + содержимое <body>.
+    Пути ../assets/ заменяются на CDN; title, meta и og задаются в настройках страницы Тильды."""
+    head = full[full.index('<link rel="preconnect"'):full.index("</head>")]
+    body = full[re.search(r"<body[^>]*>", full).end():full.index("</body>")]
+    head = re.sub(r'<script type="application/ld\+json">.*?</script>\n', "", head)  # Schema.org со ссылками на старый домен не нужен
+    if 'class="index"' in full:  # на странице выбора модели нет sticky-кнопки — убираем отступ под неё
+        head += "<style>body { padding-bottom: 0; }</style>\n"
+    code = re.sub(r'(?<=["\s])(\.\./)?assets/', SITE["cdn"] + "/assets/", head + body)
+    return f"<!-- BYD Megawatt: лендинг для блока T123. Собрано tools/build.py — вручную не править. -->\n{code.strip()}\n"
+
+
 def main():
+    if "--cdn" in sys.argv:  # для локальной проверки: python tools/build.py --cdn http://localhost:8000
+        SITE["cdn"] = sys.argv[sys.argv.index("--cdn") + 1].rstrip("/")
     for slug in MODELS:
+        full = page(slug)
         out = ROOT / slug / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(page(slug), encoding="utf-8")
+        out.write_text(full, encoding="utf-8", newline="\n")
         print("written", out.relative_to(ROOT))
-    (ROOT / "index.html").write_text(index_page(), encoding="utf-8")
+        out = ROOT / "tilda" / f"{slug}.html"
+        out.parent.mkdir(exist_ok=True)
+        out.write_text(tilda_block(full), encoding="utf-8", newline="\n")
+        print("written", out.relative_to(ROOT))
+    (ROOT / "index.html").write_text(index_page(), encoding="utf-8", newline="\n")
     print("written index.html")
+    (ROOT / "tilda" / "index.html").write_text(tilda_block(index_page(SITE["tilda_pages"])), encoding="utf-8", newline="\n")
+    print("written tilda/index.html")
 
 
 if __name__ == "__main__":
