@@ -79,6 +79,9 @@ ADDRESSES = [
     ("BYD Megawatt ТРЦ Next",
      "г. Ташкент, ул. Бобура, 6",
      "Toshkent sh., Bobur ko‘chasi, 6"),
+    ("BYD Megawatt Integro",
+     "г. Ташкент, Чиланзарский район, проспект Бунёдкор, 52Д",
+     "Toshkent sh., Chilonzor tumani, Bunyodkor shoh ko‘chasi, 52D"),
 ]
 
 # ---------------------------------------------------------------- общие тексты
@@ -137,7 +140,7 @@ COMMON = {
     "w3t": ("Оформим в банке за вас", "Bankda biz rasmiylashtiramiz"),
     "w3d": ("Подберём банк-партнёра и условия под ваш бюджет",
             "Byudjetingizga mos hamkor bank va shartlarni tanlaymiz"),
-    "w4t": ("4 салона в Ташкенте", "Toshkentda 4 ta salon"),
+    "w4t": ("5 салонов в Ташкенте", "Toshkentda 5 ta salon"),
     "w4d": ("Приезжайте в ближайший — посмотреть и прокатиться",
             "Eng yaqiniga keling — ko‘rib, haydab ko‘ring"),
     "stepsTitle": ("Как купить в 3 шага", "3 qadamda xarid"),
