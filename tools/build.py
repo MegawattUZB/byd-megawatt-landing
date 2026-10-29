@@ -9,6 +9,8 @@
 import html
 import json
 import math
+import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -31,6 +33,9 @@ SITE = {
     "theme_color": "#0e0e10",
     # Куда ведёт клик по логотипу (открывается в новой вкладке, лендинг остаётся открытым)
     "main_site": "https://byd.megawatt.uz/",
+    # Откуда страницы в Тильде берут картинки, шрифты, CSS и JS (jsDelivr поверх GitHub).
+    # После изменения файлов в assets/ — новый тег в репозитории (v2, v3…), обновить здесь и пересобрать.
+    "cdn": "https://cdn.jsdelivr.net/gh/MegawattUZB/byd-megawatt-landing@v1",
 }
 
 # Реальные отзывы клиентов. Пока список пуст — блок на сайте не выводится.
@@ -803,13 +808,30 @@ def index_page():
 """
 
 
+def tilda_block(full):
+    """Код для HTML-блока T123 в Тильде: ресурсы из <head> + содержимое <body>.
+    Пути ../assets/ заменяются на CDN; title, meta и og задаются в настройках страницы Тильды."""
+    head = full[full.index('<link rel="preconnect"'):full.index("</head>")]
+    body = full[full.index("<body>") + len("<body>"):full.index("</body>")]
+    head = re.sub(r'<script type="application/ld\+json">.*?</script>\n', "", head)  # Schema.org со ссылками на старый домен не нужен
+    code = (head + body).replace("../assets/", SITE["cdn"] + "/assets/")
+    return f"<!-- BYD Megawatt: лендинг для блока T123. Собрано tools/build.py — вручную не править. -->\n{code.strip()}\n"
+
+
 def main():
+    if "--cdn" in sys.argv:  # для локальной проверки: python tools/build.py --cdn http://localhost:8000
+        SITE["cdn"] = sys.argv[sys.argv.index("--cdn") + 1].rstrip("/")
     for slug in MODELS:
+        full = page(slug)
         out = ROOT / slug / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(page(slug), encoding="utf-8")
+        out.write_text(full, encoding="utf-8", newline="\n")
         print("written", out.relative_to(ROOT))
-    (ROOT / "index.html").write_text(index_page(), encoding="utf-8")
+        out = ROOT / "tilda" / f"{slug}.html"
+        out.parent.mkdir(exist_ok=True)
+        out.write_text(tilda_block(full), encoding="utf-8", newline="\n")
+        print("written", out.relative_to(ROOT))
+    (ROOT / "index.html").write_text(index_page(), encoding="utf-8", newline="\n")
     print("written index.html")
 
 
