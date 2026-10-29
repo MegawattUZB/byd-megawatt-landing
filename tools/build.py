@@ -35,7 +35,7 @@ SITE = {
     "main_site": "https://byd.megawatt.uz/",
     # Откуда страницы в Тильде берут картинки, шрифты, CSS и JS (jsDelivr поверх GitHub).
     # После изменения файлов в assets/ — новый тег в репозитории (v2, v3…), обновить здесь и пересобрать.
-    "cdn": "https://cdn.jsdelivr.net/gh/MegawattUZB/byd-megawatt-landing@v1",
+    "cdn": "https://cdn.jsdelivr.net/gh/MegawattUZB/byd-megawatt-landing@v2",
     # Адреса страниц в Тильде — на них ведут карточки со страницы выбора модели (tilda/index.html)
     "tilda_pages": {
         "chazor": "/promo/pr_chazor",
