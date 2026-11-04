@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = {
     # Домен без слэша на конце, например "https://promo.byd-megawatt.uz".
     # Пока пусто — canonical, hreflang и og:url не выводятся.
-    "url": "https://nematovbekk-beep.github.io",
+    "url": "https://byd.megawatt.uz/promo",
     "phone": "+998781137088",
     "phone_display": "+998 78 113 70 88",
     # Аналитика: впишите ID — счётчики подключатся автоматически.
@@ -30,12 +30,12 @@ SITE = {
     # YouTube: ID ролика (часть ссылки после watch?v=). Пусто — блок скрыт.
     "video_review_id": "",  # обзор Вадима Суцепина
     "video_client_id": "",  # отзыв клиента
-    "theme_color": "#0e0e10",
+    "theme_color": "#ffffff",
     # Куда ведёт клик по логотипу (открывается в новой вкладке, лендинг остаётся открытым)
     "main_site": "https://byd.megawatt.uz/",
     # Откуда страницы в Тильде берут картинки, шрифты, CSS и JS (jsDelivr поверх GitHub).
     # После изменения файлов в assets/ — новый тег в репозитории (v2, v3…), обновить здесь и пересобрать.
-    "cdn": "https://cdn.jsdelivr.net/gh/MegawattUZB/byd-megawatt-landing@v2",
+    "cdn": "https://cdn.jsdelivr.net/gh/MegawattUZB/byd-megawatt-landing@v3",
     # Адреса страниц в Тильде — на них ведут карточки со страницы выбора модели (tilda/index.html)
     "tilda_pages": {
         "chazor": "/promo/pr_chazor",
@@ -100,7 +100,7 @@ COMMON = {
     "b3d": ("Чем больше взнос — тем дольше срок 0%", "To‘lov qancha ko‘p bo‘lsa, 0% muddati shuncha uzun"),
     "b4t": ("Гарантия 6 лет", "6 yil kafolat"),
     "b4d": ("И 8 лет на батарею", "Batareyaga esa 8 yil"),
-    "calcTitle": ("Рассчитайте платёж за 10 секунд", "To‘lovni 10 soniyada hisoblang"),
+    "calcTitle": ("Детальный расчёт платежа", "To‘lovni batafsil hisoblash"),
     "calcLead": ("Выберите комплектацию, первый взнос и срок — увидите платёж в месяц.",
                  "Komplektatsiya, boshlang‘ich to‘lov va muddatni tanlang — oylik to‘lovni ko‘rasiz."),
     "tabInst": ("Рассрочка 0%", "0% muddatli to‘lov"),
@@ -210,6 +210,38 @@ COMMON = {
            "Sizni ertaga soat 15:00 ga yozdim ✅ Avtomobil sinovga tayyor bo‘ladi."),
     "chatCta": ("Есть вопрос? Позвоните", "Savol bormi? Qo‘ng‘iroq qiling"),
     "reviewsTitle": ("Отзывы владельцев", "Egalarining fikrlari"),
+    # выбор срока на первом экране
+    "pickTerm": ("Срок рассрочки 0%:", "0% muddati:"),
+    "moShort": ("мес", "oy"),
+    "fromPre": ("от ", ""),
+    "sumFrom": ("сум", "so‘mdan"),
+    # квиз
+    "quizTitle": ("Подберём условия за 30 секунд", "Shartlarni 30 soniyada tanlaymiz"),
+    "quizLead": ("Ответьте на 3 вопроса — покажем ваш платёж и срок без переплаты.",
+                 "3 ta savolga javob bering — oylik to‘lov va ortiqcha to‘lovsiz muddatni ko‘rsatamiz."),
+    "quizStep": ("Вопрос {n} из 3", "{n}-savol, jami 3 ta"),
+    "qq1": ("Какой первый взнос вам удобен?", "Qancha boshlang‘ich to‘lov sizga qulay?"),
+    "qq2": ("Какой платёж в месяц комфортен?", "Oyiga qancha to‘lash qulay?"),
+    "qq2a": ("до 5 млн сум", "5 mln so‘mgacha"),
+    "qq2b": ("5–8 млн сум", "5–8 mln so‘m"),
+    "qq2c": ("8–12 млн сум", "8–12 mln so‘m"),
+    "qq2d": ("больше 12 млн сум", "12 mln so‘mdan ko‘p"),
+    "qq3": ("Когда планируете покупку?", "Xaridni qachon rejalashtiryapsiz?"),
+    "qq3a": ("В этом месяце", "Shu oyda"),
+    "qq3b": ("В ближайшие 1–3 месяца", "Yaqin 1–3 oy ichida"),
+    "qq3c": ("Пока присматриваюсь", "Hozircha qarab yuribman"),
+    "quizBack": ("Назад", "Orqaga"),
+    "quizResult": ("Ваш вариант", "Sizning variantingiz"),
+    "quizFits": ("Укладывается в ваш бюджет", "Byudjetingizga mos keladi"),
+    "quizClosest": ("Ближайший к вашему бюджету вариант", "Byudjetingizga eng yaqin variant"),
+    "quizTerm": ("Срок", "Muddat"),
+    "quizCta": ("Позвонить и закрепить вариант", "Qo‘ng‘iroq qilib, variantni band qilish"),
+    "quizHot": ("Менеджер проверит наличие и забронирует условия акции за вами.",
+                "Menejer mavjudligini tekshiradi va aksiya shartlarini siz uchun band qiladi."),
+    "quizCold": ("Позвоните, если остались вопросы, — расчёт ни к чему не обязывает.",
+                 "Savollar qolgan bo‘lsa, qo‘ng‘iroq qiling — hisob-kitob hech narsaga majbur qilmaydi."),
+    "quizRestart": ("Пройти заново", "Qaytadan boshlash"),
+    "calcTitle2": ("Детальный расчёт", "Batafsil hisob-kitob"),
     "choose": ("Выберите модель", "Modelni tanlang"),
     "more": ("Подробнее", "Batafsil"),
     "yes": ("✓", "✓"),
@@ -527,6 +559,17 @@ def page(slug):
         f'<p data-i18n="a{i}">{T(f"a{i}")}</p></details>' for i in range(1, 7)
     )
 
+    # --- сроки 0% для первого экрана и варианты взноса для квиза
+    zero_all = sorted({t for tr in m["trims"] for row in tr["rates"] for t in zero_terms(row)})
+    hero_chips = "".join(
+        f'<button type="button" data-term="{t}" aria-pressed="{str(t == max_term).lower()}">{t}</button>' for t in zero_all
+    ) + f'<span class="hero__chips-mo" data-i18n="moShort">{T("moShort")}</span>'
+    cheapest = min(tr["price"] for tr in m["trims"])
+    quiz_downs = "".join(
+        f'<button type="button" data-a="{d}">{d}%<small><span data-i18n="fromPre">{T("fromPre")}</span>{fmt(math.ceil(cheapest * d / 100 / 100000) * 100000)}&nbsp;<span data-i18n="sumFrom">{T("sumFrom")}</span></small></button>'
+        for d in DOWNS
+    )
+
     # --- данные калькулятора
     calc_data = {
         "model": m["name"].replace("DM-i", "<span class='nw'>DM-i</span>"),
@@ -624,7 +667,7 @@ def page(slug):
 <body>
 <header class="top">
   <div class="wrap top__in">
-    <a class="top__home" href="{SITE["main_site"]}" target="_blank" rel="noopener" data-site="header"><img class="top__logo" src="../assets/img/brand/logo-white.png" width="705" height="49" alt="BYD Megawatt"></a>
+    <a class="top__home" href="{SITE["main_site"]}" target="_blank" rel="noopener" data-site="header"><img class="top__logo" src="../assets/img/brand/logo-red.png" width="705" height="49" alt="BYD Megawatt"></a>
     <div class="top__right">
       <div class="lang" role="group" aria-label="Язык / Til">
         <button type="button" data-lang="ru" aria-pressed="true">RU</button>
@@ -647,6 +690,10 @@ def page(slug):
         <span class="hero__price-label" data-i18n="payFrom">{T("payFrom")}</span>
         <strong><span data-hero-pay>{fmt(min_pay)}</span><sup>*</sup></strong>
         <span data-i18n="perMonth">{T("perMonth")}</span>
+        <div class="hero__terms" data-hero-terms>
+          <span class="hero__terms-label" data-i18n="pickTerm">{T("pickTerm")}</span>
+          <div class="hero__chips">{hero_chips}</div>
+        </div>
       </div>
       {call_btn("heroCta", "hero", "btn btn--red btn--xl")}
       <p class="hero__note"><i class="dot"></i><span data-i18n="heroNote">{T("heroNote")}</span></p>
@@ -663,6 +710,56 @@ def page(slug):
       <li>{ICONS["wallet"]}<div><b data-i18n="b3t">{T("b3t")}</b><span data-i18n="b3d">{T("b3d")}</span></div></li>
       <li>{ICONS["badge"]}<div><b data-i18n="b4t">{T("b4t")}</b><span data-i18n="b4d">{T("b4d")}</span></div></li>
     </ul>
+  </div>
+</section>
+
+<section class="section" id="quiz">
+  <div class="wrap wrap--narrow">
+    {el("h2", "quizTitle", "h2")}
+    {el("p", "quizLead", "lead")}
+    <div class="quiz" data-quiz>
+      <div class="quiz__bar"><i data-quiz-bar></i></div>
+      <div class="quiz__step" data-step="1">
+        <p class="quiz__n" data-quiz-n="1"></p>
+        <h3 class="quiz__q" data-i18n="qq1">{T("qq1")}</h3>
+        <div class="quiz__opts">{quiz_downs}</div>
+      </div>
+      <div class="quiz__step" data-step="2" hidden>
+        <p class="quiz__n" data-quiz-n="2"></p>
+        <h3 class="quiz__q" data-i18n="qq2">{T("qq2")}</h3>
+        <div class="quiz__opts">
+          <button type="button" data-a="5000000" data-i18n="qq2a">{T("qq2a")}</button>
+          <button type="button" data-a="8000000" data-i18n="qq2b">{T("qq2b")}</button>
+          <button type="button" data-a="12000000" data-i18n="qq2c">{T("qq2c")}</button>
+          <button type="button" data-a="999000000" data-i18n="qq2d">{T("qq2d")}</button>
+        </div>
+        <button type="button" class="quiz__back" data-back data-i18n="quizBack">{T("quizBack")}</button>
+      </div>
+      <div class="quiz__step" data-step="3" hidden>
+        <p class="quiz__n" data-quiz-n="3"></p>
+        <h3 class="quiz__q" data-i18n="qq3">{T("qq3")}</h3>
+        <div class="quiz__opts">
+          <button type="button" data-a="now" data-i18n="qq3a">{T("qq3a")}</button>
+          <button type="button" data-a="soon" data-i18n="qq3b">{T("qq3b")}</button>
+          <button type="button" data-a="later" data-i18n="qq3c">{T("qq3c")}</button>
+        </div>
+        <button type="button" class="quiz__back" data-back data-i18n="quizBack">{T("quizBack")}</button>
+      </div>
+      <div class="quiz__result" data-step="result" hidden>
+        <p class="quiz__n" data-i18n="quizResult">{T("quizResult")}</p>
+        <p class="quiz__fit" data-q-out="fit"></p>
+        <p class="quiz__trim" data-q-out="trim"></p>
+        <p class="quiz__pay"><strong data-q-out="pay"></strong> <span data-i18n="perMonth">{T("perMonth")}</span></p>
+        <dl class="calc__dl">
+          <div><dt data-i18n="downSum">{T("downSum")}</dt><dd data-q-out="down"></dd></div>
+          <div><dt data-i18n="quizTerm">{T("quizTerm")}</dt><dd data-q-out="term"></dd></div>
+          <div><dt data-i18n="rate">{T("rate")}</dt><dd data-q-out="rate"></dd></div>
+        </dl>
+        {call_btn("quizCta", "quiz", "btn btn--red btn--block")}
+        <p class="quiz__after" data-q-out="after"></p>
+        <button type="button" class="quiz__back" data-restart data-i18n="quizRestart">{T("quizRestart")}</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -708,7 +805,7 @@ def page(slug):
     <ul class="feats">{feats}</ul>
   </div>
   <ul class="gallery" aria-label="Фото">{gallery}</ul>
-  <div class="wrap center">{call_btn("testDrive", "testdrive", "btn btn--dark")}</div>
+  <div class="wrap center">{call_btn("testDrive", "testdrive", "btn btn--outline")}</div>
 </section>
 
 <section class="section section--grey" id="compare">
@@ -757,7 +854,7 @@ def page(slug):
   <div class="wrap final__in">
     {el("h2", "finalTitle", "h2")}
     {el("p", "finalText", "lead")}
-    {call_btn("call", "final", "btn btn--white btn--xl")}
+    {call_btn("call", "final", "btn btn--red btn--xl")}
     <a class="final__phone" href="{tel}" data-call="final-phone">{SITE["phone_display"]}</a>
   </div>
 </section>
@@ -765,7 +862,7 @@ def page(slug):
 
 <footer class="foot">
   <div class="wrap">
-    <a href="{SITE["main_site"]}" target="_blank" rel="noopener" data-site="footer"><img class="foot__logo" src="../assets/img/brand/logo-white.png" width="705" height="49" alt="BYD Megawatt" loading="lazy"></a>
+    <a href="{SITE["main_site"]}" target="_blank" rel="noopener" data-site="footer"><img class="foot__logo" src="../assets/img/brand/logo-red.png" width="705" height="49" alt="BYD Megawatt" loading="lazy"></a>
     {el("h2", "addrTitle", "foot__h")}
     <ul class="addr">{"".join(addr_items)}</ul>
     <p class="foot__phone"><a href="{tel}" data-call="footer">{SITE["phone_display"]}</a></p>
@@ -810,7 +907,7 @@ def index_page(hrefs=None):
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="index">
-<header class="top"><div class="wrap top__in"><a class="top__home" href="{SITE["main_site"]}" target="_blank" rel="noopener"><img class="top__logo" src="assets/img/brand/logo-white.png" width="705" height="49" alt="BYD Megawatt"></a>
+<header class="top"><div class="wrap top__in"><a class="top__home" href="{SITE["main_site"]}" target="_blank" rel="noopener"><img class="top__logo" src="assets/img/brand/logo-red.png" width="705" height="49" alt="BYD Megawatt"></a>
 <a class="top__call" href="tel:{SITE["phone"]}">{ICONS["phone"]}<span>{SITE["phone_display"]}</span></a></div></header>
 <main class="section"><div class="wrap"><h1 class="h2">Рассрочка 0% на BYD</h1><div class="picks">{"".join(cards)}</div></div></main>
 </body>
